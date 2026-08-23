@@ -1,99 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="PT Connect Network helps people find physical therapy providers and helps clinics grow through compliant patient-acquisition marketing.">
-<title>PT Connect Network | Find Physical Therapy Nationwide</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PT Connect Network | Find Physical Therapy</title>
 <style>
-:root{--navy:#0b1f3a;--blue:#1769e0;--cyan:#27b4d8;--ink:#172033;--muted:#667085;--bg:#f6f9fc;--white:#fff;--line:#e5eaf1;--green:#0f9d72}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--ink);background:var(--white);line-height:1.6}a{text-decoration:none;color:inherit}.container{width:min(1120px,92%);margin:auto}
-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav{height:74px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:900;font-size:21px;color:var(--navy);display:flex;align-items:center;gap:10px}.mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;color:white;font-weight:900}.links{display:flex;gap:28px;color:#475467;font-weight:600;font-size:14px}.navbtn{background:var(--navy);color:#fff;padding:11px 17px;border-radius:10px;font-weight:800;font-size:14px}
-.hero{background:radial-gradient(circle at 85% 15%,#dff5ff 0,transparent 34%),linear-gradient(135deg,#f5faff,#fff);padding:86px 0 70px;overflow:hidden}.heroGrid{display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:center}.eyebrow{display:inline-flex;background:#e8f2ff;color:var(--blue);padding:7px 12px;border-radius:999px;font-size:13px;font-weight:800}.hero h1{font-size:clamp(42px,6vw,68px);line-height:1.02;letter-spacing:-2.8px;margin:18px 0}.hero h1 span{color:var(--blue)}.hero p{font-size:18px;color:#5b6677;max-width:650px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 20px;border-radius:12px;font-weight:850;border:1px solid var(--line)}.primary{background:var(--blue);color:white;border-color:var(--blue)}.secondary{background:white;color:var(--navy)}.trust{display:flex;gap:22px;flex-wrap:wrap;margin-top:28px;color:#667085;font-size:13px;font-weight:700}
-.findCard{background:white;border:1px solid #dfe7f0;border-radius:24px;padding:26px;box-shadow:0 24px 70px rgba(17,48,82,.13)}.findCard h3{margin:0 0 6px;font-size:22px}.findCard p{font-size:14px;margin:0 0 18px}.field{margin:12px 0}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px;color:#344054}.field input,.field select{width:100%;padding:13px;border:1px solid #d7dee8;border-radius:10px;font:inherit;background:white}.formBtn{width:100%;margin-top:10px;border:0;cursor:pointer}
-.notice{font-size:11px!important;color:#7b8797!important;margin-top:12px!important}
-section{padding:82px 0}.soft{background:var(--bg)}.center{text-align:center}.kicker{color:var(--blue);font-weight:850;text-transform:uppercase;font-size:12px;letter-spacing:1.5px}.title{font-size:40px;line-height:1.1;letter-spacing:-1.5px;margin:10px 0 14px}.subtitle{color:var(--muted);max-width:700px;margin:0 auto}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:38px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:25px}.icon{width:45px;height:45px;border-radius:12px;background:#eaf4ff;color:var(--blue);display:grid;place-items:center;font-size:21px;font-weight:900}.card h3{margin:16px 0 7px}.card p{color:var(--muted);font-size:14px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px}.step{position:relative}.num{font-size:14px;font-weight:900;color:white;background:var(--blue);width:34px;height:34px;border-radius:50%;display:grid;place-items:center}.step h3{margin:14px 0 5px}.step p{color:var(--muted);font-size:14px}
-.provider{background:linear-gradient(135deg,var(--navy),#123c72);color:white;border-radius:28px;padding:52px;display:grid;grid-template-columns:1fr .8fr;gap:40px;align-items:center}.provider p{color:#c9d5e4}.provider .btn{background:white;color:var(--navy);border:0}
-.states{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:28px}.pill{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:white;color:#526071;font-size:13px;font-weight:700}
-.faq{max-width:820px;margin:35px auto 0}.faq details{border-bottom:1px solid var(--line);padding:18px 0}.faq summary{cursor:pointer;font-weight:800}.faq p{color:var(--muted);font-size:14px}
-footer{background:#07172c;color:#d9e2ee;padding:45px 0}.foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}.foot p{color:#9fb0c4;font-size:13px}.footlinks{display:flex;gap:20px;font-size:13px}
-.modal{display:none;position:fixed;inset:0;background:rgba(4,18,35,.65);z-index:50;align-items:center;justify-content:center;padding:20px}.modalBox{background:white;border-radius:20px;padding:28px;max-width:520px;width:100%}.close{float:right;border:0;background:#eef2f6;border-radius:8px;padding:6px 10px;cursor:pointer}
-@media(max-width:850px){.links{display:none}.heroGrid,.provider{grid-template-columns:1fr}.cards,.steps{grid-template-columns:1fr}.hero{padding-top:55px}.provider{padding:32px}.title{font-size:34px}}
+:root{--n:#0b1f3a;--b:#1769e0;--c:#27b4d8;--m:#667085;--bg:#f6f9fc;--l:#e5eaf1}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#172033;line-height:1.6}a{text-decoration:none;color:inherit}.container{width:min(1120px,92%);margin:auto}
+nav{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--l);z-index:10}.nav{height:72px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:900;font-size:20px;color:var(--n);display:flex;gap:10px;align-items:center}.mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--b),var(--c));display:grid;place-items:center;color:#fff}.links{display:flex;gap:22px;font-size:14px;font-weight:700}.navbtn,.btn{background:var(--b);color:#fff;border:0;border-radius:11px;padding:12px 18px;font-weight:800;cursor:pointer}.secondary{background:#fff;color:var(--n);border:1px solid var(--l)}
+.hero{background:linear-gradient(135deg,#f5faff,#fff);padding:72px 0}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}.hero h1{font-size:clamp(42px,6vw,68px);line-height:1.03;letter-spacing:-2.5px;margin:16px 0}.hero h1 span{color:var(--b)}.hero p{font-size:18px;color:#5b6677}.eyebrow,.badge{display:inline-block;background:#e8f2ff;color:var(--b);padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800}.card,.provider{background:#fff;border:1px solid var(--l);border-radius:20px;padding:24px}.find{box-shadow:0 20px 60px #11305220}.field{margin:12px 0}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:5px}.field input,.field select{width:100%;padding:12px;border:1px solid #d7dee8;border-radius:9px;font:inherit}.full{width:100%}
+section{padding:72px 0}.soft{background:var(--bg)}.center{text-align:center}.title{font-size:40px;line-height:1.1}.sub{color:var(--m);max-width:700px;margin:auto}.results{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}.provider h3{margin:7px 0}.provider p{color:var(--m);font-size:14px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.search{background:#fff;border:1px solid var(--l);border-radius:16px;padding:18px;margin-top:25px}.searchgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.empty{grid-column:1/-1;text-align:center;color:var(--m);padding:24px}.modal{display:none;position:fixed;inset:0;background:#041223aa;z-index:30;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.modalbox{background:#fff;border-radius:18px;padding:26px;width:min(620px,100%);max-height:92vh;overflow:auto}.close{float:right;border:0;background:#eef2f6;padding:7px 10px;border-radius:8px}.status{display:none;padding:10px;border-radius:9px;margin:10px 0}.ok{display:block;background:#eaf8f3;color:#116149}.err{display:block;background:#fff0f0;color:#a52b2b}footer{background:#07172c;color:#d9e2ee;padding:40px 0}
+@media(max-width:850px){.links{display:none}.grid,.results{grid-template-columns:1fr}.searchgrid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.searchgrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<nav><div class="container nav">
-<a class="logo" href="#"><span class="mark">PT</span> PT Connect Network</a>
-<div class="links"><a href="#how">How It Works</a><a href="#patients">For Patients</a><a href="#providers">For Clinics</a><a href="#faq">FAQ</a></div>
-<a class="navbtn" href="#find">Find a PT</a>
-</div></nav>
+<nav><div class="container nav"><a class="logo" href="#"><span class="mark">PT</span>PT Connect Network</a><div class="links"><a href="#directory">Patients</a><a href="#providers">Clinics</a><a href="#faq">FAQ</a></div><a class="navbtn" href="#directory">Find a PT</a></div></nav>
 
-<header class="hero" id="find"><div class="container heroGrid">
-<div>
-<span class="eyebrow">Nationwide physical therapy discovery</span>
-<h1>Find the right <span>physical therapist</span> near you.</h1>
-<p>PT Connect Network makes it easier to discover physical therapy providers by location, specialty, and insurance preferences.</p>
-<div class="actions"><a class="btn primary" href="#finder">Find a Physical Therapist</a><a class="btn secondary" href="#providers">For PT Clinics →</a></div>
-<div class="trust"><span>✓ Nationwide directory</span><span>✓ Patient-first matching</span><span>✓ Privacy-conscious</span></div>
-</div>
-<div class="findCard" id="finder">
-<h3>Start your search</h3><p>Tell us what you're looking for and we'll help you take the next step.</p>
-<form id="patientForm">
-<div class="field"><label>ZIP CODE</label><input required id="zip" inputmode="numeric" maxlength="5" placeholder="e.g. 48201"></div>
-<div class="field"><label>WHAT DO YOU NEED HELP WITH?</label><select required><option value="">Select a reason</option><option>Back or neck pain</option><option>Knee or hip</option><option>Sports injury</option><option>Post-surgery rehabilitation</option><option>Balance / mobility</option><option>Other</option></select></div>
-<div class="field"><label>INSURANCE</label><select required><option value="">Select an option</option><option>Private insurance</option><option>Medicare</option><option>Medicaid</option><option>Self-pay</option><option>Not sure</option></select></div>
-<button class="btn primary formBtn" type="submit">See Matching Providers →</button>
-<p class="notice">This form is a demonstration. It does not provide medical advice or guarantee insurance coverage.</p>
-</form>
-</div>
-</div></header>
+<header class="hero"><div class="container grid"><div><span class="eyebrow">Nationwide physical therapy discovery</span><h1>Find the right <span>physical therapist</span> near you.</h1><p>Discover approved physical therapy providers by location, specialty, and insurance preferences.</p><div class="actions"><a class="btn" href="#directory">Find a Physical Therapist</a><button class="btn secondary" onclick="openModal()">For PT Clinics →</button></div></div>
+<div class="card find"><h2>Start your search</h2><p>Search approved participating providers.</p><form id="patientForm"><div class="field"><label>ZIP CODE</label><input id="zip" maxlength="5" inputmode="numeric" placeholder="e.g. 48201"></div><div class="field"><label>NEED</label><select id="need"><option value="">Any</option><option>Back or neck pain</option><option>Knee or hip</option><option>Sports injury</option><option>Post-surgery rehabilitation</option><option>Balance / mobility</option><option>Other</option></select></div><button class="btn full">Search Providers →</button></form></div></div></header>
 
-<section id="patients"><div class="container center">
-<div class="kicker">For patients</div><h2 class="title">A simpler way to start PT.</h2><p class="subtitle">Compare options and contact a provider that fits your needs. PT Connect Network does not diagnose conditions or replace advice from a licensed healthcare professional.</p>
-<div class="cards">
-<div class="card"><div class="icon">1</div><h3>Tell us what you need</h3><p>Share your ZIP code and basic preferences so you can explore relevant provider options.</p></div>
-<div class="card"><div class="icon">2</div><h3>Explore providers</h3><p>Review participating clinics, specialties, locations, and other information supplied by providers.</p></div>
-<div class="card"><div class="icon">3</div><h3>Contact the clinic</h3><p>Choose a provider and contact them directly to discuss appointments, availability, and coverage.</p></div>
-</div></div></section>
+<section id="directory" class="soft"><div class="container"><div class="center"><div class="eyebrow">Provider directory</div><h2 class="title">Approved physical therapy providers</h2><p class="sub">Only providers approved in the PT Connect database appear here.</p></div><div class="search"><div class="searchgrid"><input id="dirZip" placeholder="ZIP code"><select id="dirState"><option value="">Any state</option><option>MI</option><option>TX</option><option>FL</option><option>GA</option><option>OH</option><option>IL</option><option>AZ</option><option>CA</option><option>NY</option><option>NC</option><option>PA</option></select><select id="dirSpecialty"><option value="">Any specialty</option><option>Back or neck pain</option><option>Knee or hip</option><option>Sports injury</option><option>Post-surgery rehabilitation</option><option>Balance / mobility</option><option>Other</option></select><button class="btn" id="searchBtn">Search</button></div></div><div id="results" class="results"><div class="empty">Search for providers to begin.</div></div></div></section>
 
-<section class="soft" id="how"><div class="container center">
-<div class="kicker">How it works</div><h2 class="title">Built around better patient access.</h2><p class="subtitle">A national discovery platform connecting people with physical therapy practices.</p>
-<div class="steps">
-<div class="step"><div class="num">1</div><h3>Discover</h3><p>People find PT Connect through search, social media, local content, and community outreach.</p></div>
-<div class="step"><div class="num">2</div><h3>Match</h3><p>Visitors can browse providers based on location and preferences without receiving a diagnosis from us.</p></div>
-<div class="step"><div class="num">3</div><h3>Connect</h3><p>Patients contact participating clinics directly for clinical questions, scheduling, and coverage.</p></div>
-</div></div></section>
+<section id="providers"><div class="container"><div class="card" style="background:var(--n);color:#fff"><div class="eyebrow">For physical therapy practices</div><h2 class="title">Grow your practice with PT Connect.</h2><p>Submit your clinic for review. Approved providers can be listed in the public directory.</p><button class="btn" style="background:#fff;color:var(--n)" onclick="openModal()">Apply to Join the Provider Network →</button></div></div></section>
 
-<section id="providers"><div class="container"><div class="provider">
-<div><div class="kicker" style="color:#6fd7ff">For physical therapy practices</div><h2 class="title" style="color:white">Grow your practice with a modern patient-acquisition platform.</h2><p>Get discovered by people actively looking for physical therapy while keeping your clinic in control of scheduling, clinical decisions, and patient relationships.</p><a class="btn" href="#" onclick="openModal();return false;">Join the Provider Network →</a></div>
-<div><h3>Provider benefits</h3><p>• Profile and location visibility<br>• Digital lead-generation campaigns<br>• Search and content marketing<br>• Appointment-intent inquiries<br>• Performance reporting<br>• Compliance-focused workflows</p></div>
-</div></div></section>
+<section id="faq" class="soft"><div class="container center"><h2 class="title">Questions</h2><p class="sub">PT Connect is a provider-discovery and marketing platform. It does not diagnose conditions or guarantee appointments, coverage, or outcomes.</p></div></section>
 
-<section><div class="container center"><div class="kicker">Nationwide reach</div><h2 class="title">Launching market by market.</h2><p class="subtitle">Designed to expand across the United States with city- and state-specific provider directories.</p>
-<div class="states"><span class="pill">Michigan</span><span class="pill">Texas</span><span class="pill">Florida</span><span class="pill">Georgia</span><span class="pill">Ohio</span><span class="pill">Illinois</span><span class="pill">Arizona</span><span class="pill">California</span><span class="pill">New York</span><span class="pill">North Carolina</span><span class="pill">Pennsylvania</span><span class="pill">+ More</span></div></div></section>
+<footer><div class="container">© 2026 PT Connect Network. Provider-discovery and marketing platform.</div></footer>
 
-<section class="soft" id="faq"><div class="container"><div class="center"><div class="kicker">FAQ</div><h2 class="title">Questions patients and clinics ask.</h2></div><div class="faq">
-<details><summary>Does PT Connect Network provide medical advice?</summary><p>No. The platform is designed for provider discovery and marketing. Clinical diagnosis and treatment decisions belong to licensed healthcare professionals.</p></details>
-<details><summary>Does being listed guarantee an appointment?</summary><p>No. Availability, insurance acceptance, treatment suitability, and scheduling are determined by each participating clinic.</p></details>
-<details><summary>How do clinics participate?</summary><p>Clinics can request information about provider-network participation and marketing services. Any commercial arrangement should be reviewed for applicable federal and state healthcare compliance requirements.</p></details>
-<details><summary>How is the platform paid?</summary><p>The intended business model is marketing and patient-acquisition services rather than payment for healthcare referrals. Specific pricing and compensation structures should be reviewed by qualified healthcare counsel before launch.</p></details>
-</div></div></section>
+<div class="modal" id="modal"><div class="modalbox"><button class="close" onclick="closeModal()">✕</button><h2>Apply to Join PT Connect</h2><p>Your application will be stored in the PT Connect Supabase database for review.</p><div id="status" class="status"></div><form id="providerForm">
+<div class="field"><label>CLINIC NAME *</label><input required id="clinicName"></div><div class="field"><label>CONTACT NAME</label><input id="contactName"></div><div class="field"><label>EMAIL *</label><input required type="email" id="email"></div><div class="field"><label>PHONE</label><input id="phone"></div><div class="field"><label>WEBSITE</label><input id="website" type="url" placeholder="https://"></div><div class="field"><label>CITY *</label><input required id="city"></div><div class="field"><label>STATE *</label><input required id="state" maxlength="2"></div><div class="field"><label>ZIP *</label><input required id="appZip" maxlength="5" inputmode="numeric"></div>
+<div class="field"><label>SPECIALTY</label><select id="specialty"><option>Back or neck pain</option><option>Knee or hip</option><option>Sports injury</option><option>Post-surgery rehabilitation</option><option>Balance / mobility</option><option>Other</option></select></div>
+<div class="field"><label>PLAN INTEREST</label><select id="plan"><option value="founding_99">$99 Founding</option><option value="growth_299">$299 Growth</option><option value="patient_growth_499">$499 Patient Growth</option></select></div>
+<button class="btn full" id="submit">Submit Application</button></form></div></div>
 
-<footer><div class="container foot"><div><div class="logo" style="color:white"><span class="mark">PT</span> PT Connect Network</div><p>Connecting people with physical therapy providers nationwide.</p></div><div class="footlinks"><a href="#patients">Patients</a><a href="#providers">Clinics</a><a href="#faq">FAQ</a><a href="#">Privacy</a><a href="#">Terms</a></div></div><div class="container"><p style="margin-top:30px">© 2026 PT Connect Network. This website is a marketing and provider-discovery platform and is not a substitute for professional medical advice.</p></div></footer>
+<script type="module">
+import {createClient} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+const supabase=createClient("https://serketnxvlbnkoputzbh.supabase.co","sb_publishable_yaU6xA-zgUpTtoqK2t6_CQ_ijXrhJJo");
+const $=id=>document.getElementById(id);
+const esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+window.openModal=()=>{$("modal").classList.add("show");$("status").className="status";$("status").textContent=""};
+window.closeModal=()=>$("modal").classList.remove("show");
 
-<div class="modal" id="modal"><div class="modalBox"><button class="close" onclick="closeModal()">✕</button><h2>Join the Provider Network</h2><p>Tell us where your practice is located. A production version can connect this form to your CRM and provider onboarding workflow.</p><form onsubmit="event.preventDefault(); alert('Thanks! Your provider inquiry has been received in this demo.'); closeModal();"><div class="field"><label>CLINIC NAME</label><input required placeholder="Your PT clinic"></div><div class="field"><label>EMAIL</label><input required type="email" placeholder="clinic@example.com"></div><div class="field"><label>CITY / STATE</label><input required placeholder="Detroit, MI"></div><button class="btn primary formBtn">Request Information</button></form></div></div>
-<script>
-const modal=document.getElementById('modal');
-function openModal(){modal.style.display='flex'} function closeModal(){modal.style.display='none'}
-document.getElementById('patientForm').addEventListener('submit',e=>{
- e.preventDefault();
- const zip=document.getElementById('zip').value.trim();
- if(!/^\d{5}$/.test(zip)){alert('Please enter a valid 5-digit ZIP code.');return}
- alert('Demo: provider matching would now search your ZIP code and display participating clinics.');
+async function search(zip="",state="",specialty=""){
+ const box=$("results");box.innerHTML='<div class="empty">Searching...</div>';
+ let q=supabase.from("providers").select("*").eq("status","approved").order("created_at",{ascending:false});
+ if(zip)q=q.eq("zip",zip); if(state)q=q.ilike("state",state); if(specialty)q=q.contains("specialties",[specialty]);
+ const {data,error}=await q;
+ if(error){console.error(error);box.innerHTML='<div class="empty">Provider search is temporarily unavailable.</div>';return}
+ if(!data?.length){box.innerHTML='<div class="empty">No approved providers matched your search.</div>';return}
+ box.innerHTML=data.map(p=>`<article class="provider"><span class="badge">Approved provider</span><h3>${esc(p.clinic_name)}</h3><p><strong>${esc([p.city,p.state,p.zip].filter(Boolean).join(", "))}</strong></p><p>${esc((p.specialties||[]).join(" • "))}</p><div class="actions">${p.phone?`<a class="btn" href="tel:${esc(p.phone)}">Call Clinic</a>`:""}${p.website?`<a class="btn secondary" href="${esc(p.website)}" target="_blank" rel="noopener">Website</a>`:""}</div></article>`).join("");
+}
+$("patientForm").addEventListener("submit",e=>{e.preventDefault();let z=$("zip").value.trim();if(z&&!/^\d{5}$/.test(z)){alert("Enter a valid 5-digit ZIP.");return}$("dirZip").value=z;$("dirSpecialty").value=$("need").value;document.querySelector("#directory").scrollIntoView({behavior:"smooth"});search(z,"",$("need").value)});
+$("searchBtn").addEventListener("click",()=>search($("dirZip").value.trim(),$("dirState").value,$("dirSpecialty").value));
+
+$("providerForm").addEventListener("submit",async e=>{
+ e.preventDefault();let b=$("submit"),s=$("status");b.disabled=true;b.textContent="Submitting...";
+ let payload={clinic_name:$("clinicName").value.trim(),contact_name:$("contactName").value.trim()||null,email:$("email").value.trim(),phone:$("phone").value.trim()||null,website:$("website").value.trim()||null,city:$("city").value.trim(),state:$("state").value.trim().toUpperCase(),zip:$("appZip").value.trim(),specialties:[$("specialty").value],plan_requested:$("plan").value,status:"pending"};
+ if(!/^\d{5}$/.test(payload.zip)){s.textContent="Enter a valid 5-digit ZIP.";s.className="status err";b.disabled=false;b.textContent="Submit Application";return}
+ let {error}=await supabase.from("provider_applications").insert(payload);
+ if(error){console.error(error);s.textContent="Application could not be submitted. Please try again.";s.className="status err"}else{s.textContent="Application submitted successfully. Your clinic is pending review.";s.className="status ok";e.target.reset()}
+ b.disabled=false;b.textContent="Submit Application";
 });
 </script>
-</body>
-</html>
+</body></html>

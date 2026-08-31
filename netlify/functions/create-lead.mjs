@@ -4,15 +4,16 @@ const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
-
 const json = (body, status = 200) => new Response(JSON.stringify(body), {
   status,
   headers: {
     'content-type': 'application/json',
-    'cache-control': 'no-store'
+    'cache-control': 'no-store',
+    'access-control-allow-origin': '*',
+    'access-control-allow-methods': 'POST, OPTIONS',
+    'access-control-allow-headers': 'Content-Type'
   }
 });
-
 const clean = (value, max = 500) => {
   if (value === undefined || value === null) return null;
   const text = String(value).trim();
@@ -20,9 +21,14 @@ const clean = (value, max = 500) => {
 };
 
 export default async (req) => {
+  if (req.method === 'OPTIONS') {
+    return json({}, 204);
+  }
+
   if (req.method !== 'POST') return json({ error: 'POST required' }, 405);
 
   try {
+    
     const input = await req.json();
     const clinic_name = clean(input.clinic_name, 200);
 

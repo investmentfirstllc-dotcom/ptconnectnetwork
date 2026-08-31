@@ -1,1 +1,83 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PT Connect Admin</title><style>body{font-family:system-ui;margin:0;background:#f6f9fc;color:#172033}.wrap{max-width:1100px;margin:auto;padding:30px}.card{background:#fff;border:1px solid #e5eaf1;border-radius:18px;padding:22px;margin:15px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}input,button{padding:12px;border-radius:9px;border:1px solid #d7dee8;font:inherit}button{cursor:pointer;background:#1769e0;color:#fff;border:0;font-weight:800}.danger{background:#a52b2b}.muted{color:#667085}.row{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap}.actions{display:flex;gap:8px}@media(max-width:700px){.grid{grid-template-columns:1fr}}</style></head><body><div class="wrap"><h1>PT Connect Network Admin</h1><p class="muted">Private clinic review and approval dashboard.</p><section id="login" class="card"><h2>Admin sign in</h2><input id="email" type="email" placeholder="Admin email"><input id="password" type="password" placeholder="Password" style="margin-left:8px"><button id="signIn">Sign in</button><p id="msg" class="muted"></p></section><section id="app" style="display:none"><div class="row"><h2>Provider applications</h2><button id="logout">Sign out</button></div><div id="list"></div></section></div><script type="module">import{createClient}from'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';const s=createClient('https://serketnxvlbnkoputzbh.supabase.co','sb_publishable_yaU6xA-zgUpTtoqK2t6_CQ_ijXrhJJo');const $=x=>document.getElementById(x);async function refresh(){let{data,error}=await s.from('provider_applications').select('*').order('created_at',{ascending:false});if(error){$('list').innerHTML='<div class="card">Unable to load applications. Check admin permissions.</div>';return}$('list').innerHTML=data.map(a=>`<div class="card"><div class="row"><div><h3>${a.clinic_name}</h3><div>${a.contact_name||''} • ${a.email}</div><div class="muted">${a.city}, ${a.state} ${a.zip} • ${a.plan_requested||''} • payment: ${a.payment_status||'none'}</div></div><div class="actions"><button data-id="${a.id}" class="approve">Approve</button><button data-id="${a.id}" class="reject danger">Reject</button></div></div></div>`).join('')||'<div class="card">No applications yet.</div>';document.querySelectorAll('.approve').forEach(b=>b.onclick=()=>act(b.dataset.id,'approve'));document.querySelectorAll('.reject').forEach(b=>b.onclick=()=>act(b.dataset.id,'reject'));}async function act(id,action){let{data,error}=await s.rpc('admin_review_application',{application_id:id,decision:action});if(error)alert(error.message);else refresh()}$('signIn').onclick=async()=>{let{error}=await s.auth.signInWithPassword({email:$('email').value,password:$('password').value});if(error){$('msg').textContent=error.message;return}$('login').style.display='none';$('app').style.display='block';refresh()};$('logout').onclick=async()=>{await s.auth.signOut();location.reload()};s.auth.getSession().then(({data})=>{if(data.session){$('login').style.display='none';$('app').style.display='block';refresh()}});</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PT Connect Admin</title>
+
+<style>
+body{
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  margin:0;
+  background:#f6f9fc;
+  color:#172033
+}
+.wrap{
+  max-width:1100px;
+  margin:auto;
+  padding:30px
+}
+.card{
+  background:#fff;
+  border:1px solid #e5eaf1;
+  border-radius:18px;
+  padding:22px;
+  margin:15px 0
+}
+input,button{
+  padding:12px;
+  border-radius:9px;
+  border:1px solid #d7dee8;
+  font:inherit
+}
+input{
+  width:100%;
+  box-sizing:border-box;
+  margin:6px 0
+}
+button{
+  cursor:pointer;
+  background:#1769e0;
+  color:#fff;
+  border:0;
+  font-weight:800
+}
+.danger{
+  background:#a52b2b
+}
+.muted{
+  color:#667085
+}
+.row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:center;
+  flex-wrap:wrap
+}
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap
+}
+.status{
+  padding:10px;
+  border-radius:9px;
+  margin:10px 0
+}
+@media(max-width:700px){
+  .wrap{padding:18px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<h1>PT Connect Network Admin</h1>
+<p class="muted">Private clinic review and approval dashboard.</p>
+
+<section id="login" class="card">
+
+<h

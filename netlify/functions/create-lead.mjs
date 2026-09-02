@@ -1,9 +1,20 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-);
+const getSupabase = () => {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!url || !/^https?:\/\//i.test(url)) {
+    throw new Error('SUPABASE_URL is missing or invalid.');
+  }
+
+  if (!key) {
+    throw new Error('SUPABASE_SERVICE_ROLE_KEY is missing.');
+  }
+
+  return createClient(url, key);
+};
+
 const json = (body, status = 200) => new Response(JSON.stringify(body), {
   status,
   headers: {
@@ -14,6 +25,7 @@ const json = (body, status = 200) => new Response(JSON.stringify(body), {
     'access-control-allow-headers': 'Content-Type'
   }
 });
+
 const clean = (value, max = 500) => {
   if (value === undefined || value === null) return null;
   const text = String(value).trim();
@@ -25,10 +37,12 @@ export default async (req) => {
     return json({}, 204);
   }
 
-  if (req.method !== 'POST') return json({ error: 'POST required' }, 405);
+  if (req.method !== 'POST') {
+    return json({ error: 'POST required' }, 405);
+  }
 
   try {
-    
+    const supabase = getSupabase();
     const input = await req.json();
     const clinic_name = clean(input.clinic_name, 200);
 
@@ -45,8 +59,10 @@ export default async (req) => {
       city: clean(input.city, 100),
       state: clean(input.state, 100),
       zip: clean(input.zip, 20),
-      rating: input.rating === null || input.rating === undefined || input.rating === '' ? null : Number(input.rating),
-      review_count: input.review_count === null || input.review_count === undefined || input.review_count === '' ? null : Number(input.review_count),
+      rating: input.rating === null || input.rating === undefined || input.rating === ''
+        ? null : Number(input.rating),
+      review_count: input.review_count === null || input.review_count === undefined || input.review_count === ''
+        ? null : Number(input.review_count),
       source: clean(input.source, 100) || 'manual',
       lead_score: Math.max(0, Math.min(100, Number(input.lead_score) || 0)),
       priority: clean(input.priority, 20) || 'warm',
@@ -61,17 +77,25 @@ export default async (req) => {
       updated_at: new Date().toISOString()
     };
 
-    if (lead.rating !== null && (!Number.isFinite(lead.rating) || lead.rating < 0 || lead.rating > 5)) {
+    if (lead.rating !== null &&
+        (!Number.isFinite(lead.rating) || lead.rating < 0 || lead.rating > 5)) {
       return json({ error: 'rating must be between 0 and 5.' }, 400);
     }
 
-    if (lead.review_count !== null && (!Number.isInteger(lead.review_count) || lead.review_count < 0)) {
+    if (lead.review_count !== null &&
+        (!Number.isInteger(lead.review_count) || lead.review_count < 0)) {
       return json({ error: 'review_count must be a non-negative integer.' }, 400);
     }
 
     const query = lead.place_id
-      ? supabase.from('pt_leads').upsert(lead, { onConflict: 'place_id', ignoreDuplicates: false }).select().single()
-      : supabase.from('pt_leads').insert(lead).select().single();
+      ? supabase.from('pt_leads')
+          .upsert(lead, { onConflict: 'place_id', ignoreDuplicates: false })
+          .select()
+          .single()
+      : supabase.from('pt_leads')
+          .insert(lead)
+          .select()
+          .single();
 
     const { data, error } = await query;
 
@@ -81,8 +105,11 @@ export default async (req) => {
     }
 
     return json({ ok: true, lead: data });
+
   } catch (error) {
     console.error('create-lead error:', error);
-    return json({ error: 'Could not create lead.' }, 500);
+    return json({
+      error: error instanceof Error ? error.message : String(error)
+    }, 500);
   }
-};
+};q
